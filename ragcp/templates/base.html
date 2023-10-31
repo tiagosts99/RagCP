@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+
+    
+
+    -->
+    <meta charset="UTF-8">
+    <title>{% block title %}RagCP{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ragcp.css' %}">
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+</head>
+
+<body style="background-image: url('{{ STATIC_URL }} /static/main-bg-clean.jpg');background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+{% include 'header.html' %}
+
+{% include 'navigation.html' %}
+
+<!-- Site Content -->
+
+{% block body_base %}
+
+    <header class="masthead masthead-page mb-5"
+            style="background-color: transparent; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 py-5" style="color: #ffffff; text-shadow: 2px 2px 2px #000000;">
+                    {% block masterhead %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main" class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="container justify-content-md-center">
+                        {% block body %}
+                        {% endblock %}
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    {% include 'base_rightmenu.html' %}
+
+                </div>
+            </div>
+    </main>
+{% endblock %}
+
+</body>
+</html>

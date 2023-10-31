@@ -1,0 +1,32 @@
+/* Esta classe define o estilo para a seção parallax */
+.parallax {
+    /* Imagem utilizada como fundo */
+    /* background-image: url("../background_header.png");*/  /* Descomente e substitua pelo caminho da imagem de fundo desejada */
+
+    /* Define uma altura específica */
+    height: 450px;
+
+    /* Cria o efeito de rolagem parallax */
+    background-attachment: fixed; /* Mantém a imagem de fundo fixa durante a rolagem */
+    background-position: center; /* Centraliza a imagem de fundo horizontalmente */
+    background-position-y: -200px; /* Ajusta a posição vertical da imagem de fundo */
+    background-repeat: no-repeat; /* Impede a repetição da imagem de fundo */
+    background-size: cover; /* Escala a imagem de fundo para cobrir todo o contêiner */
+    position: relative;
+    vertical-align: top;
+    transform-origin: center top;
+    transform: translateZ(-100px) scale(1.1); /* Aplica um leve efeito 3D à camada parallax */
+}
+
+/* Esta classe define o estilo para o conteúdo antes da seção parallax */
+.pre-parallax {
+    /*background-image: url("../main-bg.jpg");*/ /* Descomente e substitua pelo caminho da imagem de fundo desejada */
+    background-color: transparent; /* Define a cor de fundo antes da seção parallax */
+}
+
+/* Desativa a rolagem parallax para todos os tablets e celulares. Aumente/diminua os pixels conforme necessário */
+@media only screen and (max-device-width: 1366px) {
+    .parallax {
+        background-attachment: scroll; /* Mude para 'scroll' para desativar o efeito parallax em dispositivos menores */
+    }
+}

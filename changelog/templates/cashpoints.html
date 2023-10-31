@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block masterhead %}
+<h1>Comprar CASHPOINTS</h1>
+<h2>Viewing detailed list of updates for this server</h2>
+{% endblock %}
+
+{% block body %}
+
+<header class="jumbotron subhead" id="overview">
+    <form method="POST">
+        {% csrf_token %}
+
+        <i class="em em-bust_in_silhouette" aria-role="presentation"
+        aria-label="BUST IN SILHOUETTE"></i> {{ user.username }}
+        <br>
+        <br>
+        <h3>Saldo atual: R$ {{ cash }}</h3>
+        <br>
+
+        {{ form.as_p }}
+
+        <br>
+        <label for="rmtpoints">Quantidade de CASHPONTS:</label>
+        <input type="number" name="cash" id="cash">
+        <br>
+        <label for="payment_method">Forma de Pagamento:</label>
+        <select name="payment_method" id="payment_method">
+            <option value="credit_card">Cartão de Crédito</option>
+            <option value="bank_transfer">Transferência Bancária</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <button type="submit" name="confirm-button" id="confirm-button">Confimar</button>
+    </form>
+</header>
+
+
+{% endblock %}

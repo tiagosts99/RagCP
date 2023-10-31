@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block masterhead %}
+    <h1>Bem Vindo!</h1>
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_authenticated and request.user.is_staff %}
+        <a href="{% url 'content:new_entry' %}">
+            <button type="button" class="btn btn-sm btn-block btn-secondary"
+                    style="margin-bottom: 5px;">
+                <i class="em em-lower_left_ballpoint_pen"
+                   aria-role="presentation" aria-label=""></i>
+                Create new post
+            </button>
+        </a>
+        {% if FEED_ENABLED %}
+            <a href="{% url 'content:get_feed' %}">
+                <button type="button" class="btn btn-sm btn-block btn-secondary"
+                        style="margin-bottom: 5px;">
+                    <i class="em em-satellite" aria-role="presentation"
+                       aria-label=""></i>
+                    FEED de Notícias
+                </button>
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if posts and not STATIC_INDEX %}
+        {% for post in posts %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-0 shadow mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between small">
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-12"
+                                             style="text-align: center;">
+                                            <img width="32px" height="32px"
+                                                 src="{{ post.author.gravatar_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"
+                                             style="text-align: center;">
+                                            {% if post.author.sex == 'S' %}
+                                                <span class="font-weight-bold">{{ post.author.username }}</span>
+                                            {% else %}
+                                                <a href="{% url 'users:profile' post.author.id %}">
+                                                    <span class="font-weight-bold">{{ post.author.username }}</span>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"
+                                             style="text-align: center;">
+                                            <span>{{ post.added | naturaltime }}</span>
+                                        </div>
+                                    </div>
+                                    {% if request.user.is_staff %}
+                                        {% include 'post_options.html' %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        {% if post.reference %}
+                                            <a href="{{ post.reference }}">
+                                                <h5>
+                                                    {{ post.title }}
+                                                </h5>
+                                            </a>
+                                        {% else %}
+                                            <h5>{{ post.title }}</h5>
+                                        {% endif %}
+                                        <hr class="my-2">
+                                    </div>
+                                    <div class="row">
+                                        <span>{{ post.content | safe }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{% url 'content:post_details' post.id %}">
+                                        <i class="em em-right_anger_bubble"
+                                           aria-role="presentation"
+                                           aria-label=""></i>
+                                        {{ post.num_responses }}
+                                        responses
+                                    </a>
+                                </div>
+                            </div>
+                            {% if request.user.is_staff and post.deleted %}
+                                <div class="row" style="padding-top: 1em;">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info alert-dismissible fade show"
+                                             role="alert">
+                                            This post and its answers are not
+                                            visible unless they have the link...
+                                            <button type="button" class="close"
+                                                    data-dismiss="alert"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        {% include 'welcome_content.html' %}
+    {% endif %}
+{% endblock %}

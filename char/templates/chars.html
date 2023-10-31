@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block masterhead %}
+    <h1>Characters</h1>
+{% endblock %}
+
+{% block body %}
+    {% if char_count == 0 %}
+        <header class="jumbotron subhead" id="overview">
+            <h1>:(</h1>
+            <h3>No chars</h3>
+            <p class="lead">Sorry, you don't have any char on this server.</p>
+        </header>
+    {% else %}
+        {% for char in chars %}
+            {% include 'char.html' %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

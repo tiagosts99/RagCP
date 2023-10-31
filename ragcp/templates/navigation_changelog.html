@@ -1,0 +1,23 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="rankingDropdown"
+       role="button"
+       data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+       <i class="em em-shopping_trolley" aria-role="presentation" aria-label="SHOPPING TROLLEY"></i>
+        Comprar Moedas
+    </a>
+    <div class="dropdown-menu" aria-labelledby="rankingDropdown">
+        {% if RAGCP_CHANGELOG %}
+            <a class="dropdown-item" href="{% url 'changelog:cashpoints' %}">
+                <i class="em em-moneybag" aria-role="presentation" aria-label="MONEY BAG"></i>
+                CASH
+            </a>
+        {% endif %}
+        {% if RATHENA_CHANGELOG %}
+            <a class="dropdown-item" href="{% url 'changelog:rmtpoints' %}">
+                <i class="em em-money_with_wings" aria-role="presentation" aria-label="MONEY WITH WINGS"></i>
+                RMT
+            </a>
+        {% endif %}
+    </div>
+</li>
